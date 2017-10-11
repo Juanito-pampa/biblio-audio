@@ -28,7 +28,7 @@ public class Saisie
 	}
 
 	/**
-	 * Demande � l'utilisateur de saisir un nombre entre 0 et max
+	 * Demande à l'utilisateur de saisir un nombre entre 0 et max
 	 */
 	public static int saisieInt( String message, int max )
 	{

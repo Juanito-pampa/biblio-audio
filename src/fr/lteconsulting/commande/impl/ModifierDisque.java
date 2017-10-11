@@ -21,7 +21,7 @@ public class ModifierDisque implements Commande
 	@Override
 	public void executer( ContexteExecution contexte )
 	{
-		Disque disque = selectionnerDisque( contexte );
+		Disque disque = selectionnerDisque( "modification", contexte );
 		if( disque == null )
 		{
 			System.out.println( "Aucun disque sélectionné, on abandonne..." );
@@ -30,7 +30,7 @@ public class ModifierDisque implements Commande
 
 		disque.afficher( false );
 
-		Menu menu = new Menu();
+		Menu menu = new Menu( "Modification du disque '" + disque.getNom() + "'" );
 		menu.ajouterCommande( new ModifierTitreOuCodeBarreDisque( disque ) );
 		menu.ajouterCommande( new AjouterChansonDisque( disque ) );
 		// TODO menu.ajouterCommande( new SupprimerChansonDisque( disque ) );
@@ -40,11 +40,11 @@ public class ModifierDisque implements Commande
 		commande.executer( contexte );
 	}
 
-	private Disque selectionnerDisque( ContexteExecution contexte )
+	private Disque selectionnerDisque( String sousTitre, ContexteExecution contexte )
 	{
 		// Choix du type de recherche
 		ChoixTypeRecherche choixTypeRecherche = new ChoixTypeRecherche();
-		Menu menu = new Menu();
+		Menu menu = new Menu( "Sélection d'un disque pour " + sousTitre );
 		menu.ajouterCommande( new ChoixTypeRechercheCommande( "Rechercher un disque par son nom", TypeRecherche.PAR_NOM, choixTypeRecherche ) );
 		menu.ajouterCommande( new ChoixTypeRechercheCommande( "Rechercher un disque par son code barre", TypeRecherche.PAR_CODE_BARRE, choixTypeRecherche ) );
 		Commande choixRecherche = menu.saisirCommmande();
@@ -76,8 +76,14 @@ public class ModifierDisque implements Commande
 		String critere = Saisie.saisie( "Quel mot-clé à trouver dans le nom ?" );
 		List<Disque> disques = contexte.getBibliotheque().rechercherDisqueParNom( critere );
 
+		if( disques != null && disques.size() == 1 )
+		{
+			// pas besoin de faire choisir s'il n'y a qu'un seul choix !
+			return disques.get( 0 );
+		}
+
 		ChoixDisque choixDisque = new ChoixDisque();
-		Menu menu = new Menu();
+		Menu menu = new Menu( "Sélection d'un disque" );
 		for( Disque disque : disques )
 			menu.ajouterCommande( new ChoixDisqueCommande( disque, choixDisque ) );
 		Commande commandeDeSelection = menu.saisirCommmande();

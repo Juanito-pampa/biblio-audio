@@ -16,7 +16,7 @@ import fr.lteconsulting.commande.impl.SauvegardeFichier;
 public class InferfaceUtilisateur
 {
 	private ContexteExecution contexte;
-	private Menu menu = new Menu();
+	private Menu menu = new Menu("Menu principal");
 
 	public InferfaceUtilisateur( ContexteExecution contexte )
 	{
