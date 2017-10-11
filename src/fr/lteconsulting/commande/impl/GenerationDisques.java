@@ -1,7 +1,7 @@
-package fr.lteconsulting.commandes;
+package fr.lteconsulting.commande.impl;
 
-import fr.lteconsulting.Commande;
-import fr.lteconsulting.ContexteExecution;
+import fr.lteconsulting.commande.Commande;
+import fr.lteconsulting.commande.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.GenerateurDisque;

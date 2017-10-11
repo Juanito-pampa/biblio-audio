@@ -1,4 +1,4 @@
-package fr.lteconsulting.commandes;
+package fr.lteconsulting.commande.impl;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import fr.lteconsulting.Commande;
-import fr.lteconsulting.ContexteExecution;
+import fr.lteconsulting.commande.Commande;
+import fr.lteconsulting.commande.ContexteExecution;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.Saisie;

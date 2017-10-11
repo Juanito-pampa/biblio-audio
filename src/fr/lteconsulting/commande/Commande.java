@@ -1,4 +1,4 @@
-package fr.lteconsulting;
+package fr.lteconsulting.commande;
 
 import fr.lteconsulting.modele.Bibliotheque;
 

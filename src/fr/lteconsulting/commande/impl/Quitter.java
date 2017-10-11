@@ -1,7 +1,7 @@
-package fr.lteconsulting.commandes;
+package fr.lteconsulting.commande.impl;
 
-import fr.lteconsulting.Commande;
-import fr.lteconsulting.ContexteExecution;
+import fr.lteconsulting.commande.Commande;
+import fr.lteconsulting.commande.ContexteExecution;
 import fr.lteconsulting.outils.Saisie;
 
 public class Quitter implements Commande

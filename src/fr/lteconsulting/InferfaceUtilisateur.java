@@ -1,14 +1,16 @@
 package fr.lteconsulting;
 
-import fr.lteconsulting.commandes.AffichageDisquesParCodeBarre;
-import fr.lteconsulting.commandes.AffichageDisquesParNom;
-import fr.lteconsulting.commandes.AjouterDisque;
-import fr.lteconsulting.commandes.ChargerFichier;
-import fr.lteconsulting.commandes.GenerationDisques;
-import fr.lteconsulting.commandes.Quitter;
-import fr.lteconsulting.commandes.RechercheParCodeBarre;
-import fr.lteconsulting.commandes.RechercheParNom;
-import fr.lteconsulting.commandes.SauvegardeFichier;
+import fr.lteconsulting.commande.Commande;
+import fr.lteconsulting.commande.ContexteExecution;
+import fr.lteconsulting.commande.impl.AffichageDisquesParCodeBarre;
+import fr.lteconsulting.commande.impl.AffichageDisquesParNom;
+import fr.lteconsulting.commande.impl.AjouterDisque;
+import fr.lteconsulting.commande.impl.ChargerFichier;
+import fr.lteconsulting.commande.impl.GenerationDisques;
+import fr.lteconsulting.commande.impl.Quitter;
+import fr.lteconsulting.commande.impl.RechercheParCodeBarre;
+import fr.lteconsulting.commande.impl.RechercheParNom;
+import fr.lteconsulting.commande.impl.SauvegardeFichier;
 import fr.lteconsulting.modele.Bibliotheque;
 
 public class InferfaceUtilisateur

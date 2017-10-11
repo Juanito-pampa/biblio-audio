@@ -1,4 +1,4 @@
-package fr.lteconsulting.commandes;
+package fr.lteconsulting.commande.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,8 +12,8 @@ import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import fr.lteconsulting.Commande;
-import fr.lteconsulting.ContexteExecution;
+import fr.lteconsulting.commande.Commande;
+import fr.lteconsulting.commande.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;

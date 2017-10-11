@@ -3,6 +3,7 @@ package fr.lteconsulting;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.lteconsulting.commande.Commande;
 import fr.lteconsulting.outils.Saisie;
 
 public class Menu
