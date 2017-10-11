@@ -7,11 +7,11 @@ import fr.lteconsulting.commande.impl.AffichageDisquesParNom;
 import fr.lteconsulting.commande.impl.AjouterDisque;
 import fr.lteconsulting.commande.impl.ChargerFichier;
 import fr.lteconsulting.commande.impl.GenerationDisques;
-import fr.lteconsulting.commande.impl.ModifierDisque;
 import fr.lteconsulting.commande.impl.Quitter;
 import fr.lteconsulting.commande.impl.RechercheParCodeBarre;
 import fr.lteconsulting.commande.impl.RechercheParNom;
 import fr.lteconsulting.commande.impl.SauvegardeFichier;
+import fr.lteconsulting.commande.impl.modifdisque.ModifierDisque;
 
 public class InferfaceUtilisateur
 {
