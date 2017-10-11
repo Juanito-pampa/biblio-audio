@@ -1,6 +1,7 @@
 package fr.lteconsulting.commandes;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.GenerateurDisque;
@@ -8,13 +9,6 @@ import fr.lteconsulting.outils.Saisie;
 
 public class GenerationDisques implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public GenerationDisques( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -22,7 +16,7 @@ public class GenerationDisques implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		int nbDisques = Saisie.saisieInt( "Combien de disques voulez-vous générer?" );
 		if( nbDisques <= 0 )
@@ -37,7 +31,7 @@ public class GenerationDisques implements Commande
 
 			disque.afficher( false );
 
-			bibliotheque.ajouterDisque( disque );
+			contexte.getBibliotheque().ajouterDisque( disque );
 		}
 	}
 }

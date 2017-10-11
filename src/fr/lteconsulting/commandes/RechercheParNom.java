@@ -3,19 +3,13 @@ package fr.lteconsulting.commandes;
 import java.util.List;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.Saisie;
 
 public class RechercheParNom implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public RechercheParNom( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -23,11 +17,11 @@ public class RechercheParNom implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		String terme = Saisie.saisie( "Saisissez le terme de recherche" );
 
-		List<Disque> disques = bibliotheque.rechercherDisqueParNom( terme );
+		List<Disque> disques = contexte.getBibliotheque().rechercherDisqueParNom( terme );
 
 		if( disques == null || disques.isEmpty() )
 		{

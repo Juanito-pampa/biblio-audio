@@ -13,18 +13,21 @@ import fr.lteconsulting.modele.Bibliotheque;
 
 public class InferfaceUtilisateur
 {
+	private ContexteExecution contexte;
 	private Menu menu = new Menu();
 
-	public InferfaceUtilisateur( Bibliotheque bibliotheque )
+	public InferfaceUtilisateur( ContexteExecution contexte )
 	{
-		menu.ajouterCommande( new AjouterDisque( bibliotheque ) );
-		menu.ajouterCommande( new RechercheParNom( bibliotheque ) );
-		menu.ajouterCommande( new RechercheParCodeBarre( bibliotheque ) );
-		menu.ajouterCommande( new GenerationDisques( bibliotheque ) );
-		menu.ajouterCommande( new AffichageDisquesParNom( bibliotheque ) );
-		menu.ajouterCommande( new AffichageDisquesParCodeBarre( bibliotheque ) );
-		menu.ajouterCommande( new SauvegardeFichier( bibliotheque ) );
-		menu.ajouterCommande( new ChargerFichier( bibliotheque ) );
+		this.contexte = contexte;
+
+		menu.ajouterCommande( new AjouterDisque() );
+		menu.ajouterCommande( new RechercheParNom() );
+		menu.ajouterCommande( new RechercheParCodeBarre() );
+		menu.ajouterCommande( new GenerationDisques() );
+		menu.ajouterCommande( new AffichageDisquesParNom() );
+		menu.ajouterCommande( new AffichageDisquesParCodeBarre() );
+		menu.ajouterCommande( new SauvegardeFichier() );
+		menu.ajouterCommande( new ChargerFichier() );
 		menu.ajouterCommande( new Quitter() );
 	}
 
@@ -34,7 +37,7 @@ public class InferfaceUtilisateur
 		{
 			Commande commandeAExecuter = menu.saisirCommmande();
 
-			commandeAExecuter.executer();
+			commandeAExecuter.executer( contexte );
 		}
 	}
 }

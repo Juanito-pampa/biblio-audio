@@ -3,6 +3,7 @@ package fr.lteconsulting.commandes;
 import java.util.UUID;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;
@@ -10,13 +11,6 @@ import fr.lteconsulting.outils.Saisie;
 
 public class AjouterDisque implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public AjouterDisque( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -24,7 +18,7 @@ public class AjouterDisque implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer(ContexteExecution contexte)
 	{
 		String nom = Saisie.saisie( "Nom du disque" );
 		String codeBarre = Saisie.saisie( "Code barre (laisser vide pour génération aléatoire)" );
@@ -45,6 +39,6 @@ public class AjouterDisque implements Commande
 			disque.addChanson( chanson );
 		}
 
-		bibliotheque.ajouterDisque( disque );
+		contexte.getBibliotheque().ajouterDisque( disque );
 	}
 }

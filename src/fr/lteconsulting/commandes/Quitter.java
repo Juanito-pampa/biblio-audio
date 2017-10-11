@@ -1,6 +1,7 @@
 package fr.lteconsulting.commandes;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.outils.Saisie;
 
 public class Quitter implements Commande
@@ -12,7 +13,7 @@ public class Quitter implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		String reponse = Saisie.saisie( "Voulez-vous vraiment partir ? (oui/non)" );
 		if( "oui".equals( reponse ) )

@@ -1,19 +1,13 @@
 package fr.lteconsulting.commandes;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.Saisie;
 
 public class RechercheParCodeBarre implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public RechercheParCodeBarre( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -21,11 +15,11 @@ public class RechercheParCodeBarre implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		String codeBarre = Saisie.saisie( "Saisissez le code barre" );
 
-		Disque disque = bibliotheque.rechercherDisqueParCodeBarre( codeBarre );
+		Disque disque = contexte.getBibliotheque().rechercherDisqueParCodeBarre( codeBarre );
 
 		if( disque == null )
 		{

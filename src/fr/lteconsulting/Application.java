@@ -6,8 +6,11 @@ public class Application
 {
 	public static void main( String[] args )
 	{
-		Bibliotheque b = new Bibliotheque();		
-		InferfaceUtilisateur ui = new InferfaceUtilisateur( b );
+		Bibliotheque bibliotheque = new Bibliotheque();
+
+		ContexteExecution contexteExecution = new ContexteExecution( bibliotheque, "bibliotheque.data" );
+
+		InferfaceUtilisateur ui = new InferfaceUtilisateur( contexteExecution );
 
 		ui.execute();
 	}

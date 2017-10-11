@@ -6,18 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 
 public class AffichageDisquesParCodeBarre implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public AffichageDisquesParCodeBarre( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -25,9 +19,9 @@ public class AffichageDisquesParCodeBarre implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer(ContexteExecution contexte)
 	{
-		List<Disque> disques = new ArrayList<>( bibliotheque.getDisques() );
+		List<Disque> disques = new ArrayList<>( contexte.getBibliotheque().getDisques() );
 
 		// trier par codeBarre, le comparateur est une classe anonyme
 		Collections.sort( disques, new Comparator<Disque>()

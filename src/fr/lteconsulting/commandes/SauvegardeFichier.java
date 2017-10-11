@@ -13,7 +13,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import fr.lteconsulting.Commande;
-import fr.lteconsulting.modele.Bibliotheque;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.Saisie;
@@ -38,15 +38,7 @@ import fr.lteconsulting.outils.Saisie;
  */
 public class SauvegardeFichier implements Commande
 {
-	public static final String NOM_FICHIER = "bibliotheque.data";
 	public static final String MAGIC_SIGNATURE = "BIB1";
-
-	private Bibliotheque bibliotheque;
-
-	public SauvegardeFichier( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
 
 	@Override
 	public String getNom()
@@ -54,19 +46,19 @@ public class SauvegardeFichier implements Commande
 		return "Sauvegarder la bibliothèque dans un fichier";
 	}
 
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		try
 		{
-			Collection<Disque> disques = bibliotheque.getDisques();
+			Collection<Disque> disques = contexte.getBibliotheque().getDisques();
 
 			System.out.println( "Enregistrement des " + disques.size() + " disques en cours..." );
 
 			OutputStream outputStream;
 			if( "oui".equals( Saisie.saisie( "Voulez-vous compresser ? (oui/non)" ) ) )
-				outputStream = zipOutputStream();
+				outputStream = zipOutputStream( contexte.getDataFilePath() );
 			else
-				outputStream = flatOutputStream();
+				outputStream = flatOutputStream( contexte.getDataFilePath() );
 
 			PrintWriter writer = new PrintWriter( outputStream );
 
@@ -90,7 +82,7 @@ public class SauvegardeFichier implements Commande
 
 			writer.close();
 
-			System.out.println( "Enregistrement effectué dans le fichier " + NOM_FICHIER );
+			System.out.println( "Enregistrement effectué dans le fichier " + contexte.getDataFilePath() );
 		}
 		catch( FileNotFoundException e )
 		{
@@ -106,17 +98,17 @@ public class SauvegardeFichier implements Commande
 		}
 	}
 
-	private OutputStream zipOutputStream() throws IOException
+	private OutputStream zipOutputStream( String nomFichier ) throws IOException
 	{
-		FileOutputStream fos = new FileOutputStream( NOM_FICHIER + ".zip" );
+		FileOutputStream fos = new FileOutputStream( nomFichier + ".zip" );
 		ZipOutputStream zos = new ZipOutputStream( fos, Charset.forName( "UTF8" ) );
-		ZipEntry ze = new ZipEntry( NOM_FICHIER );
+		ZipEntry ze = new ZipEntry( nomFichier );
 		zos.putNextEntry( ze );
 		return zos;
 	}
 
-	private OutputStream flatOutputStream() throws IOException
+	private OutputStream flatOutputStream( String nomFichier ) throws IOException
 	{
-		return new FileOutputStream( NOM_FICHIER );
+		return new FileOutputStream( nomFichier );
 	}
 }

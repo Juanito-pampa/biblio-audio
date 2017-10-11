@@ -13,6 +13,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;
@@ -20,13 +21,6 @@ import fr.lteconsulting.outils.Saisie;
 
 public class ChargerFichier implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public ChargerFichier( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -34,7 +28,7 @@ public class ChargerFichier implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer( ContexteExecution contexte )
 	{
 		try
 		{
@@ -42,9 +36,9 @@ public class ChargerFichier implements Commande
 
 			InputStream inputStream;
 			if( "oui".equals( Saisie.saisie( "Utiliser la version zip ? (oui/non)" ) ) )
-				inputStream = zipStream();
+				inputStream = zipStream( contexte.getDataFilePath() );
 			else
-				inputStream = flatStream();
+				inputStream = flatStream( contexte.getDataFilePath() );
 
 			InputStreamReader inputStreamReader = new InputStreamReader( inputStream, "UTF8" );
 			BufferedReader reader = new BufferedReader( inputStreamReader );
@@ -58,8 +52,8 @@ public class ChargerFichier implements Commande
 
 			try
 			{
-				int nombreDisquesCharges = lireBibliothequeDepuisFichier( reader );
-				System.out.println( "OK, " + nombreDisquesCharges + " disques ont été chargés depuis le fichier " + SauvegardeFichier.NOM_FICHIER );
+				int nombreDisquesCharges = lireBibliothequeDepuisFichier( contexte.getBibliotheque(), reader );
+				System.out.println( "OK, " + nombreDisquesCharges + " disques ont été chargés depuis le fichier " + contexte.getDataFilePath() );
 			}
 			catch( Exception e )
 			{
@@ -82,7 +76,7 @@ public class ChargerFichier implements Commande
 		}
 	}
 
-	private int lireBibliothequeDepuisFichier( BufferedReader reader ) throws IOException
+	private int lireBibliothequeDepuisFichier( Bibliotheque bibliotheque, BufferedReader reader ) throws IOException
 	{
 		int nombreDisques = Integer.parseInt( reader.readLine() );
 
@@ -124,24 +118,24 @@ public class ChargerFichier implements Commande
 		return new Chanson( nom, duree );
 	}
 
-	private InputStream zipStream() throws IOException
+	private InputStream zipStream( String nomFichier ) throws IOException
 	{
-		FileInputStream fileInputStream = new FileInputStream( SauvegardeFichier.NOM_FICHIER + ".zip" );
+		FileInputStream fileInputStream = new FileInputStream( nomFichier + ".zip" );
 		ZipInputStream zis = new ZipInputStream( fileInputStream, Charset.forName( "UTF8" ) );
 
 		ZipEntry ze = zis.getNextEntry();
 		if( ze == null )
 			return null;
 
-		if( !SauvegardeFichier.NOM_FICHIER.equals( ze.getName() ) )
+		if( !nomFichier.equals( ze.getName() ) )
 			return null;
 
 		return zis;
 	}
 
-	private InputStream flatStream() throws FileNotFoundException
+	private InputStream flatStream( String nomFichier ) throws FileNotFoundException
 	{
-		File file = new File( SauvegardeFichier.NOM_FICHIER );
+		File file = new File( nomFichier );
 		return new FileInputStream( file );
 	}
 }

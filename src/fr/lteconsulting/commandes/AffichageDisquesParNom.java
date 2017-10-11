@@ -5,19 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.lteconsulting.Commande;
+import fr.lteconsulting.ContexteExecution;
 import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.ComparateurDisqueParNom;
 
 public class AffichageDisquesParNom implements Commande
 {
-	private Bibliotheque bibliotheque;
-
-	public AffichageDisquesParNom( Bibliotheque bibliotheque )
-	{
-		this.bibliotheque = bibliotheque;
-	}
-
 	@Override
 	public String getNom()
 	{
@@ -25,9 +19,9 @@ public class AffichageDisquesParNom implements Commande
 	}
 
 	@Override
-	public void executer()
+	public void executer(ContexteExecution contexte)
 	{
-		List<Disque> disques = new ArrayList<Disque>( bibliotheque.getDisques() );
+		List<Disque> disques = new ArrayList<Disque>( contexte.getBibliotheque().getDisques() );
 
 		Collections.sort( disques, new ComparateurDisqueParNom() );
 
