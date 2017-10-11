@@ -6,7 +6,6 @@ import java.util.List;
 
 import fr.lteconsulting.commande.Commande;
 import fr.lteconsulting.commande.ContexteExecution;
-import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.ComparateurDisqueParNom;
 

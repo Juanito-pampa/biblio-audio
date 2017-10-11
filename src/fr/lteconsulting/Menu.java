@@ -8,6 +8,8 @@ import fr.lteconsulting.outils.Saisie;
 
 public class Menu
 {
+	// TODO Ajouter un titre au menu
+	
 	private List<Commande> commandes = new ArrayList<>();
 
 	public void ajouterCommande( Commande commande )

@@ -14,7 +14,11 @@ public class Saisie
 		BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
 		try
 		{
-			return reader.readLine();
+			String result = reader.readLine();
+			if( result != null && result.trim().isEmpty() )
+				return null;
+
+			return result;
 		}
 		catch( IOException e )
 		{

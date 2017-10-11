@@ -4,10 +4,10 @@ import java.util.UUID;
 
 import fr.lteconsulting.commande.Commande;
 import fr.lteconsulting.commande.ContexteExecution;
-import fr.lteconsulting.modele.Bibliotheque;
 import fr.lteconsulting.modele.Chanson;
 import fr.lteconsulting.modele.Disque;
 import fr.lteconsulting.outils.Saisie;
+import fr.lteconsulting.ui.OutilsSaisie;
 
 public class AjouterDisque implements Commande
 {
@@ -18,7 +18,7 @@ public class AjouterDisque implements Commande
 	}
 
 	@Override
-	public void executer(ContexteExecution contexte)
+	public void executer( ContexteExecution contexte )
 	{
 		String nom = Saisie.saisie( "Nom du disque" );
 		String codeBarre = Saisie.saisie( "Code barre (laisser vide pour génération aléatoire)" );
@@ -29,13 +29,10 @@ public class AjouterDisque implements Commande
 
 		while( true )
 		{
-			String titre = Saisie.saisie( "Nom de la chanson (laisser vide pour terminer)" );
-			if( titre.isEmpty() )
+			Chanson chanson = OutilsSaisie.saisirChanson();
+			if( chanson == null )
 				break;
 
-			int duree = Saisie.saisieInt( "Durée de la chanson" );
-
-			Chanson chanson = new Chanson( titre, duree );
 			disque.addChanson( chanson );
 		}
 
